@@ -9,47 +9,10 @@ import os
 from PIL import Image
 from numpy import *
 #Import the image and create image object
-unexplored=[]
-found=False
-path=os.getcwd()
-def findFile(fileName,files):
-	for file in files:
-		if fileName==file:
-			found=True
-			path=os.path.abspath(file)
-			break
-		else:
-			if '.' not in file:
-				unexplored.append(file)
-def search(fileName):
-	global found
-	global path
-	currentDir=os.getcwd()
-	files=os.listdir(currentDir)
-	if fileName in files:
-		found=True
-	else:
-		findFile(fileName,files)
-		while len(unexplored) >0 and found == False:
-			nowCurrent=os.path.abspath(unexplored.pop(0))
-			try:
-				files=os.listdir(nowCurrent)
-				if fileName not in files:
-					findFile(fileName,files)
-				else:
-					found=True
-					path=nowCurrent
-			except FileNotFoundError:
-				continue	
-				if found:
-					break
-	if found:
-		return path
-	else:
-		raise FileNotFoundError	
-fileName=input("Enter JPEG/PNG file name with extenstion:")
-imagePath=search(fileName)+"/"+fileName
-image=Image.open(imagePath)
+
+# The code is not generic just works for Image Test.png assuming that Test.png is in the same directory of the file.
+
+image=Image.open("Test.png")
 image=image.resize((100,100))
 #Image format and size
 print("The format of the image is ",image.format)
