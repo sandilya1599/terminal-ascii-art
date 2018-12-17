@@ -30,27 +30,24 @@ print("The format of the image is ",image.format)
 print("The size of image is ",image.size[0],"X",image.size[1])
 #import numpy and use its array to convert image to array
 matrix=array(image)
-
 # find the no of rows and columns
 rows,cols=len(matrix),len(matrix[1])
-#brightness of each pixel 
+#brightness of each pixel
 brightness=zeros(shape=(rows,cols),dtype=int)
-
 for row in range(rows):
     for col in range(cols):
         brightness[row][col]=average(matrix[row][col])
 print("Constructed Brightness matrix")
-
+#brightness is mapped to the below string values
 mapped="`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
 asciiBrightness=empty(shape=(rows,cols),dtype="<U2")
-
 """approximation
 256 numbers to 65 characters
 which means 4 numbers to each character"""
 for row in range(rows):
     for col in range(cols):
         asciiBrightness[row][col]=mapped[int(round(brightness[row][col]/65))]
-
+#printing the brightness	
 for row in range(rows):
     for col in range(cols):
         print(asciiBrightness[row][col],end="")
