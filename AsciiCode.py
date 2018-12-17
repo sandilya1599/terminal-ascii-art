@@ -47,7 +47,7 @@ which means 4 numbers to each character"""
 for row in range(rows):
     for col in range(cols):
         asciiBrightness[row][col]=mapped[int(round(brightness[row][col]/65))]
-#printing the brightness	
+#printing the brightness
 for row in range(rows):
     for col in range(cols):
         print(asciiBrightness[row][col],end="")
