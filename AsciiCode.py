@@ -8,16 +8,26 @@ Created on Fri Dec 14 13:19:25 2018
 import os
 from PIL import Image
 from numpy import *
-#Import the image and create image object
 
-# The code is not generic just works for Image Test.png assuming that Test.png is in the same directory of the file.
 
-image=Image.open("Test.png")
+def search(fileName):
+	path=""
+	for (root,dir,files) in os.walk(os.getcwd(),topdown=True):
+		if fileName in files:
+			path=root+"/"+fileName
+			break
+	if path=="":
+		raise FileNotFoundError
+	else:
+		return path
+
+fileName=input("Enter JPEG/PNG file name with extenstion:")
+imagePath=search(fileName)
+image=Image.open(imagePath)
 image=image.resize((100,100))
 #Image format and size
 print("The format of the image is ",image.format)
 print("The size of image is ",image.size[0],"X",image.size[1])
-
 #import numpy and use its array to convert image to array
 matrix=array(image)
 
@@ -45,4 +55,3 @@ for row in range(rows):
     for col in range(cols):
         print(asciiBrightness[row][col],end="")
     print()
- 
